@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 export function loggingHandler(req: Request, res: Response, next: NextFunction) {
   logger.info(`Method: [${req.method}] - url: [${req.url}] - IP:[${req.socket.remoteAddress}]`);

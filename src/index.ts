@@ -5,6 +5,8 @@ import './utils/loger';
 import { loggingHandler } from './middlewares/loggingHandler';
 import { routeNotFound } from './middlewares/routeNotFound';
 import { rateLimiter } from './middlewares/rateLimiting';
+import router from './routes/index';
+
 dotenv.config();
 
 const app: Express = express();
@@ -16,9 +18,11 @@ app.use(express.json());
 //Log all routes
 app.use(loggingHandler);
 
-app.get('/hi', rateLimiter, (req: Request, res: Response) => {
-  res.status(200).json(`Express`);
-});
+// app.get('/hi', rateLimiter, (req: Request, res: Response) => {
+//   res.status(200).json(`Express`);
+// });
+
+app.use('/api',router)
 
 //Log not found routes
 app.use(routeNotFound);
