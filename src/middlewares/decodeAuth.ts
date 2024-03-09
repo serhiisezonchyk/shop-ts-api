@@ -13,11 +13,9 @@ export default function (req: CustomRequest, res: Response, next: NextFunction) 
     if (!token) {
       return res.status(401).json({ error: 'No access' });
     }
-    if (process.env.SECRET_KEY) {
-      const decoded = jwt.verify(token, process.env.SECRET_KEY);
-      req.user = decoded;
-      next();
-    }
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    req.user = decoded;
+    next();
   } catch (error) {
     return res.status(401).json({ error: 'No access' });
   }

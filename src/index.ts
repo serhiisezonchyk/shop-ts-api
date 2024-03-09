@@ -1,11 +1,11 @@
-import express, { Express, Request, Response } from 'express';
-import dotenv from 'dotenv';
 import cors from 'cors';
-import './utils/loger';
+import dotenv from 'dotenv';
+import express, { Express } from 'express';
 import { loggingHandler } from './middlewares/loggingHandler';
 import { routeNotFound } from './middlewares/routeNotFound';
-import { rateLimiter } from './middlewares/rateLimiting';
 import router from './routes/index';
+import './utils/env';
+import './utils/loger';
 
 dotenv.config();
 
@@ -22,12 +22,12 @@ app.use(loggingHandler);
 //   res.status(200).json(`Express`);
 // });
 
-app.use('/api',router)
+app.use('/api', router);
 
 //Log not found routes
 app.use(routeNotFound);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.listen(port, () => {
   logger.info(`[server]: Server is running at http://localhost:${port}`);

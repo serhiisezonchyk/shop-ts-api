@@ -12,11 +12,7 @@ interface CustomRequest extends Request {
 }
 
 const generateJwt = ({ id, lastName }: jwtType): string | null => {
-  if (process.env.SECRET_KEY) {
-    return jwt.sign({ id, lastName }, process.env.SECRET_KEY, { expiresIn: '12H' });
-  } else {
-    return null;
-  }
+  return jwt.sign({ id, lastName }, process.env.SECRET_KEY, { expiresIn: '12H' });
 };
 
 export const login = async (req: Request, res: Response) => {
